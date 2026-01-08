@@ -1,0 +1,179 @@
+body {
+  font-family: sans-serif;
+  background-color: #f3f4f6;
+}
+
+/* Simulation Styles */
+:root {
+  --floor-height: 100px;
+  --lift-width: 60px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --floor-height: 80px;
+    --lift-width: 50px;
+  }
+}
+
+.floor {
+  height: var(--floor-height);
+  border-bottom: 1px solid #d1d5db;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 8px;
+  background: rgba(255,255,255,0.5);
+}
+
+.shaft {
+  width: calc(var(--lift-width) + 10px);
+  background-color: #e5e7eb;
+  border-left: 1px solid #9ca3af;
+  border-right: 1px solid #9ca3af;
+  position: relative;
+  height: 100%;
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.lift {
+  width: var(--lift-width);
+  height: calc(var(--floor-height) - 10px);
+  background-color: #cbd5e1; /* Interior color */
+  border: 2px solid #475569;
+  border-radius: 4px;
+  position: absolute;
+  left: 3px;
+  bottom: 5px; 
+  display: flex;
+  flex-direction: column; /* Stack status box and doors area */
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow: hidden; 
+}
+
+/* New Status Box Styling */
+.lift-status-box {
+  width: 100%;
+  height: 24px;
+  background-color: #111827; /* Dark gray/black */
+  color: #ef4444; /* Red LED text */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 0.75rem;
+  z-index: 20;
+  border-bottom: 1px solid #374151;
+  flex-shrink: 0; /* Prevent shrinking */
+  line-height: 1;
+  gap: 2px;
+}
+
+/* Doors occupy the rest of the space */
+.door {
+  position: absolute;
+  top: 24px; /* Start after status box */
+  height: calc(100% - 24px);
+  width: 50%;
+  background-color: #3b82f6; /* Blue doors */
+  border: 1px solid #1d4ed8;
+  transition: width 2.5s ease-in-out;
+  z-index: 2;
+}
+
+.door.left {
+  left: 0;
+  border-right: 1px solid #1e40af;
+}
+
+.door.right {
+  right: 0;
+  border-left: 1px solid #1e40af;
+}
+
+/* Animation State: Open */
+.lift.doors-open .door {
+  width: 5%; /* Open doors */
+}
+
+/* State Classes */
+.lift.moving {
+  border-color: #b91c1c;
+}
+
+/* Layout helpers */
+#simulation-container {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #9ca3af;
+  background: white;
+  margin-top: 20px;
+  overflow-x: auto; /* Horizontal scroll for many lifts */
+  padding-bottom: 20px;
+}
+
+.floors-column {
+  display: flex;
+  flex-direction: column-reverse; /* Floor 0 at bottom */
+  min-width: 120px;
+  border-right: 4px solid #374151;
+  position: sticky;
+  left: 0;
+  background: white;
+  z-index: 20;
+  box-shadow: 4px 0 6px rgba(0,0,0,0.05);
+}
+
+.shafts-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 20px;
+  position: relative;
+}
+
+.floor-label {
+  font-weight: bold;
+  color: #374151;
+  margin-left: 8px;
+  font-size: 1.1rem;
+  width: 30px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: 4px;
+}
+
+.direction-btn {
+  width: 32px;
+  height: 28px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.direction-btn:hover {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.direction-btn.active {
+  background-color: #fcd34d; /* Yellow/Orange for active call */
+  color: #b45309;
+  border-color: #f59e0b;
+  font-weight: bold;
+}
