@@ -16,16 +16,35 @@
     <!-- Input Section -->
     <div class="bg-white p-4 md:p-6 rounded-lg shadow-md mb-8">
       <div class="flex flex-wrap gap-4 items-end">
+        
+        <!-- Floors -->
         <div class="w-full md:w-auto">
           <label class="block text-sm font-medium text-gray-700 mb-1">Floors</label>
-          <input type="number" id="numFloors" value="" min="2" max="20"
-            class="w-full md:w-32 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input
+            type="text"
+            id="numFloors"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+            min="2"
+            max="20"
+            class="w-full md:w-32 border border-gray-300 rounded px-3 py-2
+                   focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
+        <!-- Lifts -->
         <div class="w-full md:w-auto">
           <label class="block text-sm font-medium text-gray-700 mb-1">Lifts</label>
-          <input type="number" id="numLifts" value="" min="1" max="10"
-            class="w-full md:w-32 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <input
+            type="text"
+            id="numLifts"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+            min="1"
+            max="10"
+            class="w-full md:w-32 border border-gray-300 rounded px-3 py-2
+                   focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
         <button id="generateBtn"
@@ -33,6 +52,7 @@
           Generate
         </button>
       </div>
+
       <div id="error-message" class="hidden w-full text-red-600 text-sm font-bold mt-2"></div>
     </div>
 
